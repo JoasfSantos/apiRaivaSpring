@@ -6,6 +6,6 @@ import br.com.raiva.apiRaiva.model.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    Usuario findByCpf(Long cpf);
+    Usuario findByCpf(String cpf);
 
 }

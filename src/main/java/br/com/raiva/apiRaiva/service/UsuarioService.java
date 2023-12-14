@@ -19,7 +19,7 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final EnderecoRepository enderecoRepository;
 
-    public Optional<Usuario> autenticacao(Long cpf) {
+    public Optional<Usuario> autenticacao(String cpf) {
         return Optional.ofNullable(usuarioRepository.findByCpf(cpf));
     }
 

@@ -37,7 +37,7 @@ public class Usuario {
     private String telefone;
 
     @Column(nullable = false, unique = true)
-    private long cpf;
+    public String cpf;
 
     @Column(nullable = false)
     private boolean agenteSaude;
@@ -46,7 +46,7 @@ public class Usuario {
     @JsonManagedReference
     private List<Caso> casos;
 
-    public Usuario(String nome, LocalDate dataNascimento, Endereco endereco, String telefone, Long cpf,
+    public Usuario(String nome, LocalDate dataNascimento, Endereco endereco, String telefone, String cpf,
             boolean agenteSaude) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;

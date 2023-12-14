@@ -37,17 +37,8 @@ public class DataInitializer implements CommandLineRunner {
                 Endereco endereco4 = new Endereco("Cidade4", "Bairro4", "Rua4", 78L, 101112L, "Complemento4");
                 endereco4 = enderecoRepository.save(endereco4);
 
-                Usuario usuario1 = new Usuario("Master", LocalDate.now(), endereco1, "telefone1", 1L, true);
-                usuarioRepository.save(usuario1);
-
-                Usuario usuario2 = new Usuario("Izanf", LocalDate.now(), endereco2, "telefone2", 2L, true);
+                Usuario usuario2 = new Usuario("Izanf", LocalDate.now(), endereco2, "telefone2", "017.568.394-84", true);
                 usuarioRepository.save(usuario2);
-
-                Usuario usuario3 = new Usuario("Sâmú", LocalDate.now(), endereco3, "telefone3", 3L, true);
-                usuarioRepository.save(usuario3);
-
-                Usuario usuario4 = new Usuario("Jozz", LocalDate.now(), endereco4, "telefone4", 4L, true);
-                usuarioRepository.save(usuario4);
 
                 ///////////////////////////////////////////////////////////////////////
 

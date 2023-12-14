@@ -18,6 +18,8 @@ import br.com.raiva.apiRaiva.service.UsuarioService;
 import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 
+import br.com.raiva.apiRaiva.utils.CPFValidator;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/usuario")
@@ -25,15 +27,25 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
-    @GetMapping("/autenticacao")
-    public ResponseEntity<List<Object>> autenticacao(@RequestParam Long cpf) {
-        Optional<Usuario> usuarioOptional = usuarioService.autenticacao(cpf);
-        if (!usuarioOptional.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @PostMapping("/autenticacao")
+    public ResponseEntity<Object> autenticacao(@RequestBody Usuario data) {
+        try {
+            boolean isCPFValid = CPFValidator.isValidCPF(data.cpf);
+            if (!isCPFValid) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+
+            Optional<Usuario> usuarioOptional = usuarioService.autenticacao(data.cpf);
+            if (!usuarioOptional.isPresent()) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+            Usuario usuario = usuarioOptional.get();
+            return new ResponseEntity<>(usuario, HttpStatus.OK);
+        } catch (Exception error) {
+            System.out.println(error.getMessage());
+            return null;
         }
-        Usuario usuario = usuarioOptional.get();
-        return new ResponseEntity<>(Arrays.asList(usuario != null, usuario.isAgenteSaude(), usuario.getId()),
-                HttpStatus.OK);
     }
 
     @PostMapping("/registrar-usuario")
