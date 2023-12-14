@@ -27,4 +27,8 @@ public class CasoService {
         return casoRepository.findByUsuario_Id(id);
     }
 
+    public List<Caso> buscarTodosOsCasos() {
+        return casoRepository.findAll();
+    }
+
 }

@@ -35,6 +35,15 @@ public class CasoController {
         return new ResponseEntity<>(casos, HttpStatus.OK);
     }
 
+    @GetMapping("/casos")
+    public ResponseEntity<List<Caso>> todosOsCasos() {
+        List<Caso> casos = casoService.buscarTodosOsCasos();
+        if (casos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(casos, HttpStatus.OK);
+    }    
+
     @PostMapping("/registrar-caso")
     public ResponseEntity<Caso> registrarCaso(@RequestBody Caso caso, @RequestParam Long usuarioId) {
         Optional<Usuario> usuarioOptional = usuarioService.buscarPorId(usuarioId);

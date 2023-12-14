@@ -2,6 +2,8 @@ package br.com.raiva.apiRaiva.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -48,9 +50,11 @@ public class Caso {
     private boolean vacinado;
 
     @ManyToOne
+    @JsonBackReference
     private Usuario usuario;
 
-    public Caso(String nomeVitima, Integer idadeVitima, LocalDate dataOcorrido, String bairroOcorrido, String ruaOcorrido,
+    public Caso(String nomeVitima, Integer idadeVitima, LocalDate dataOcorrido, String bairroOcorrido,
+            String ruaOcorrido,
             String localMordida, String tipoAnimal, boolean domestico, boolean vacinado) {
         this.nomeVitima = nomeVitima;
         this.idadeVitima = idadeVitima;
