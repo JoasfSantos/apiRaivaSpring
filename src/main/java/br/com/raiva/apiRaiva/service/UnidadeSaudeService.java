@@ -18,4 +18,8 @@ public class UnidadeSaudeService {
         return unidadeSaudeRepository.findByDistrito(distrito);
     }
 
+    public List<UnidadeSaude> buscarTodosAsUnidades() {
+        return unidadeSaudeRepository.findAll();
+    }
+
 }

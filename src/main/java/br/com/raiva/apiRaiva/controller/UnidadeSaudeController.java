@@ -2,6 +2,7 @@ package br.com.raiva.apiRaiva.controller;
 
 import java.util.List;
 
+import br.com.raiva.apiRaiva.model.Caso;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +16,11 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/unidades-por-distrito")
+@RequestMapping("/api/unidades-de-saude")
 public class UnidadeSaudeController {
-
     private final UnidadeSaudeService unidadeSaudeService;
 
-    @GetMapping
+    @GetMapping("/por-unidade")
     public ResponseEntity<List<UnidadeSaude>> unidadesPorDistrito(@RequestParam String distrito) {
         List<UnidadeSaude> unidades = unidadeSaudeService.buscarPorDistrito(distrito);
         if (unidades.isEmpty()) {
@@ -29,4 +29,12 @@ public class UnidadeSaudeController {
         return new ResponseEntity<>(unidades, HttpStatus.OK);
     }
 
+    @GetMapping("/listar")
+    public ResponseEntity<List<UnidadeSaude>> todosAsUnidades() {
+        List<UnidadeSaude> unidades = unidadeSaudeService.buscarTodosAsUnidades();
+        if (unidades.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(unidades, HttpStatus.OK);
+    }
 }
